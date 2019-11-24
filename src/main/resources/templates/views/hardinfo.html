@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>硬件数据</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/layui-v2.4.5/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/hard_css/hardinfo.css}">
+</head>
+<body>
+<div class="layui-fluid" style="width: 80%">
+    <div class="layui-row layui-col-space5">
+        <div class="layui-col-md3" style="width: 30%">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    信息全览
+                </div>
+                <div class="layui-card-body">
+                    <fieldset class="layui-elem-field">
+                        <legend>CPU信息</legend>
+                        <div class="layui-field-box">
+                            <ul>
+                                <li>
+                                    <label class="info-title">名称</label>
+                                    <label class="info-value">信息</label>
+                                    <label class="info-unit">单位</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">CPU生产商</label>
+                                    <label class="info-value1" id="cpuVendor">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">CPU核心数量</label>
+                                    <label class="info-value" id="cpuCoreNum">***</label>
+                                    <label class="info-value" >(个)</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">CPU的总量MHz</label>
+                                    <label class="info-value" id="cpuMhz">***</label>
+                                    <label class="info-value" >(Mhz)</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">CPU类别</label>
+                                    <label id="cpuModel" class="info-value1">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">CPU缓存数量</label>
+                                    <label class="info-value1" id="cpuCacheSize">***</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </fieldset>
+                    <fieldset class="layui-elem-field">
+                        <legend>内存信息</legend>
+                        <div class="layui-field-box">
+                            <ul>
+                                <li>
+                                    <label class="info-title">名称</label>
+                                    <label class="info-value">信息</label>
+                                    <label class="info-unit">单位</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">内存总量</label>
+                                    <label class="info-value" id="total">***</label>
+                                    <label class="info-unit">(K av)</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">当前使用量</label>
+                                    <label class="info-value" id="used">***</label>
+                                    <label class="info-unit">(K used)</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">当前剩余量</label>
+                                    <label class="info-value" id="free">***</label>
+                                    <label class="info-unit">(K free)</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">交换区总量</label>
+                                    <label class="info-value" id="swapTotal">***</label>
+                                    <label class="info-unit">(K av)</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">交换区使用量</label>
+                                    <label class="info-value" id="swapUsed">***</label>
+                                    <label class="info-unit">(K used)</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">交换区剩余量</label>
+                                    <label class="info-value" id="swapFree">***</label>
+                                    <label class="info-unit">(K free)</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </fieldset>
+                    <fieldset class="layui-elem-field">
+                        <legend>操作系统信息</legend>
+                        <div class="layui-field-box">
+                            <ul>
+                                <li>
+                                    <label class="info-title">名称</label>
+                                    <label class="info-value">信息</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">架构</label>
+                                    <label class="info-value1" id="arch">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">CpuEndian</label>
+                                    <label class="info-value1" id="cpuEndian">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">DataModel</label>
+                                    <label class="info-value1" id="dataModel">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">描述</label>
+                                    <label class="info-value1" id="desc">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">卖主</label>
+                                    <label class="info-value1" id="vendor">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">版本号</label>
+                                    <label class="info-value1" id="version">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">系统类型</label>
+                                    <label class="info-value1" id="name">***</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </fieldset>
+                    <fieldset class="layui-elem-field">
+                        <legend>用户信息</legend>
+                        <div class="layui-field-box">
+                            <ul>
+                                <li>
+                                    <label class="info-title">名称</label>
+                                    <label class="info-value">信息</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">控制台</label>
+                                    <label class="info-value1" id="device">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">Host</label>
+                                    <label class="info-value1" id="host">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">用户名</label>
+                                    <label class="info-value1" id="user">***</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </fieldset>
+                    <!--<fieldset class="layui-elem-field">
+                        <legend>文件系统信息</legend>
+                        <div class="layui-field-box">
+                            <ul>
+                                <li>
+                                    <label class="info-title">名称</label>
+                                    <label class="info-value">信息</label>
+                                    <label class="info-unit">单位</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">网略状态</label>
+                                    <label class="info-value">优秀</label>
+                                    <label class="info-unit">(10GB/s)</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </fieldset>-->
+                    <fieldset class="layui-elem-field">
+                        <legend>网络信息</legend>
+                        <div class="layui-field-box">
+                            <ul>
+                                <li>
+                                    <label class="info-title">名称</label>
+                                    <label class="info-value">信息</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">网络设备名</label>
+                                    <label class="info-value1" id="deviceName">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">IP地址</label>
+                                    <label class="info-value1" id="address">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">子网掩码</label>
+                                    <label class="info-value1" id="mask">***</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </fieldset>
+                    <fieldset class="layui-elem-field">
+                        <legend>以太网信息</legend>
+                        <div class="layui-field-box">
+                            <ul>
+                                <li>
+                                    <label class="info-title">名称</label>
+                                    <label class="info-value">信息</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">IP地址</label>
+                                    <label class="info-value1" id="ip">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">网关广播地址</label>
+                                    <label class="info-value1" id="broadcast">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">网卡MAC地址</label>
+                                    <label class="info-value1" id="mac">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">子网掩码</label>
+                                    <label class="info-value1" id="maskYiTai">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">网卡描述信息</label>
+                                    <label class="info-value1" id="descYiTai">***</label>
+                                </li>
+                                <li>
+                                    <label class="info-title">网卡类型</label>
+                                    <label class="info-value1" id="type">***</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md9" style="width: 70%">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    实时数据
+                </div>
+                <div class="layui-card-body">
+                    <fieldset class="layui-elem-field">
+                        <legend>系统内存使用实时数据</legend>
+                        <div class="layui-field-box">
+                            <div id="sysDataCharts" style="width: 100%;height: 400px"></div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="layui-elem-field">
+                        <legend>Java虚拟机内存使用实时数据</legend>
+                        <div class="layui-field-box">
+                            <div id="vmDataCharts" style="width: 100%;height: 400px"></div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="layui-elem-field">
+                        <legend>CPU使用情况</legend>
+                        <div class="layui-field-box">
+                            <div id="cpuDataCharts" style="width: 100%;height: 400px"></div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script th:src="@{/js/jquery-latest.js}"></script>
+<script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+<script th:src="@{/layui-v2.4.5/layui/layui.js}"></script>
+<script th:src="@{/hard_js/hardInfo.js}"></script>
+<!--<script src="/static/hard_js/hardInfo.js" type="text/javascript" rel="script"></script>-->
+</body>
+</html>
