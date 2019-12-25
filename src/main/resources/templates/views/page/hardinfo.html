@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/hard_css/hardinfo.css}">
 </head>
 <body>
-<div class="layui-fluid" style="width: 80%">
+<div class="layui-fluid" style="width: 95%">
     <div class="layui-row layui-col-space5">
         <div class="layui-col-md3" style="width: 30%">
             <div class="layui-card">
@@ -240,17 +240,25 @@
                 </div>
                 <div class="layui-card-body">
                     <fieldset class="layui-elem-field">
+                        <legend>文件系统</legend>
+                        <div class="layui-field-box">
+                            <ul id="fileSystemBox">
+
+                            </ul>
+                        </div>
+                    </fieldset>
+                    <fieldset class="layui-elem-field">
                         <legend>系统内存使用实时数据</legend>
                         <div class="layui-field-box">
                             <div id="sysDataCharts" style="width: 100%;height: 400px"></div>
                         </div>
                     </fieldset>
-                    <fieldset class="layui-elem-field">
+                    <!--<fieldset class="layui-elem-field">
                         <legend>Java虚拟机内存使用实时数据</legend>
                         <div class="layui-field-box">
                             <div id="vmDataCharts" style="width: 100%;height: 400px"></div>
                         </div>
-                    </fieldset>
+                    </fieldset>-->
                     <fieldset class="layui-elem-field">
                         <legend>CPU使用情况</legend>
                         <div class="layui-field-box">
@@ -263,6 +271,26 @@
 
     </div>
 </div>
+<script type="text/html" id="demo" template>
+    <li>
+        <label class="info-title1">磁盘名称</label>
+        <label class="info-title1">磁盘描述</label>
+        <label class="info-title1">磁盘类型</label>
+        <label class="info-title1">可使用内存</label>
+        <label class="info-title1">总内存</label>
+        <label class="info-title1">使用占比</label>
+    </li>
+    {{# layui.each(d.result,function(index,item){ }}
+    <li>
+        <label class="info-value2">{{item.name}}</label>
+        <label class="info-value2">{{item.desc}}</label>
+        <label class="info-value2">{{item.type}}</label>
+        <label class="info-value2">{{item.usable}}</label>
+        <label class="info-value2">{{item.totalSpace}}</label>
+        <label class="info-value2">{{item.usedPercent}}%</label>
+    </li>
+    {{# }); }}
+</script>
 <script th:src="@{/js/jquery-latest.js}"></script>
 <script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
 <script th:src="@{/layui-v2.4.5/layui/layui.js}"></script>

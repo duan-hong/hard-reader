@@ -1,0 +1,67 @@
+{
+  "clearInfo": {
+    "clearUrl": "api/clear.json"
+  },
+  "homeInfo": {
+    "title": "系统综合信息",
+    "icon": "fa fa-home",
+    "href": "hardInfo",
+    "sysId": "hard-reader"
+  },
+  "logoInfo": {
+    "title": "计算机监控系统",
+    "image": "images/logo.png",
+    "href": ""
+  },
+  "menuInfo": {
+    "currency": {
+      "title": "系统信息监控",
+      "icon": "fa fa-address-book",
+      "child": [
+        {
+          "title": "系统信息监控",
+          "href": "",
+          "icon": "fa fa-home",
+          "target": "_self",
+          "child": [
+            {
+              "title": "系统基本信息",
+              "icon": "fa fa-home",
+              "href": "hardInfo",
+              "sysId": "hard-reader",
+              "target": "_self"
+            },
+            {
+              "title": "流量信息监控",
+              "href": "overlay-sidebar",
+              "icon": "fa fa-line-chart",
+              "target": "_self",
+              "sysId": "flow-monitor"
+            },
+            {
+              "title": "进程管理",
+              "href": "processInfo",
+              "icon": "fa fa-tasks",
+              "target": "_self",
+              "sysId": "processes-manager"
+            }
+          ]
+        },
+        {
+          "title": "系统设置",
+          "href": "page/setting.html",
+          "icon": "fa fa-gears",
+          "target": "_self",
+          "child": [
+            {
+              "title": "菜单管理",
+              "href": "page/menu.html",
+              "icon": "fa fa-window-maximize",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

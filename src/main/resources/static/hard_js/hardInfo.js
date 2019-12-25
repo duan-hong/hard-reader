@@ -1,6 +1,7 @@
-layui.use(['element', 'tree', 'table', 'layer', 'form'],function () {
+layui.use(['element', 'tree', 'table', 'layer', 'form','laytpl'],function () {
+    var laytpl=layui.laytpl;
     var sysDataCharts = echarts.init(document.getElementById('sysDataCharts'));
-    var vmDataCharts=echarts.init(document.getElementById('vmDataCharts'));
+    // var vmDataCharts=echarts.init(document.getElementById('vmDataCharts'));
     var cpuDataCharts=echarts.init(document.getElementById('cpuDataCharts'));
     var option = {
         grid: {
@@ -317,14 +318,14 @@ layui.use(['element', 'tree', 'table', 'layer', 'form'],function () {
             data: [],
         }]
     };
-    window.refreshVmCharts=function(dateTime,vmDatavalue,vmDatavalue1,vmDatavalue2){
+    /*window.refreshVmCharts=function(dateTime,vmDatavalue,vmDatavalue1,vmDatavalue2){
         vmOption.xAxis.data = dateTime;
         vmOption.series[0].data = vmDatavalue;
         vmOption.series[1].data = vmDatavalue1;
         vmOption.series[2].data = vmDatavalue2;
         vmDataCharts.setOption(vmOption, true);
         vmDataCharts.hideLoading();
-    }
+    }*/
     window.refreshCharts = function (dateTime,datavalue,datavalue1,datavalue2) {
         option.xAxis.data = dateTime;
         option.series[0].data = datavalue;
@@ -389,7 +390,7 @@ layui.use(['element', 'tree', 'table', 'layer', 'form'],function () {
                     dataId.push(item.dataId)
                 }
                 refreshCharts(dateTime,datavalue,datavalue1,datavalue2);
-                refreshVmCharts(dateTime,vmDatavalue,vmDatavalue1,vmDatavalue2);
+                // refreshVmCharts(dateTime,vmDatavalue,vmDatavalue1,vmDatavalue2);
             }
         })
 
@@ -425,7 +426,9 @@ layui.use(['element', 'tree', 'table', 'layer', 'form'],function () {
         loadSys();
         loadUser();
         loadNet();
+        loadFiles();
         loadYiTaiNet();
+        loadFileSys();
     }
     window.loadCpuInfo=function(){
         $.ajax({
@@ -512,6 +515,19 @@ layui.use(['element', 'tree', 'table', 'layer', 'form'],function () {
         })
     }
 
+    window.loadFiles=function(){
+        $.ajax({
+            type: "get",
+            url: "/hard-reader/hardBase/fileSystem",
+            dataType: "json",
+            data: {},
+            success:function (res) {
+                var data=res.result;
+               console.log(data)
+            }
+        })
+    }
+
     window.loadYiTaiNet=function(){
         $.ajax({
             type: "get",
@@ -530,14 +546,30 @@ layui.use(['element', 'tree', 'table', 'layer', 'form'],function () {
         })
     }
 
+    function loadFileSys(){
+        $.ajax({
+            ype: "get",
+            url: "/hard-reader/hardBase/fileSystemOfOshi",
+            dataType: "json",
+            data: {},
+            success: function (res) {
+                var getTpl = demo.innerHTML
+                var fileSystemBox = document.getElementById('fileSystemBox');
+                laytpl(getTpl).render(res, function(html){
+                    fileSystemBox.innerHTML = html;
+                });
+            }
+        })
+    }
+
     sysDataCharts.showLoading({
         text:'正在加载数据...',
         effectOption: {backgroundColor: 'rgba(0, 0, 0, 0.2)'}
     })
-    vmDataCharts.showLoading({
+    /*vmDataCharts.showLoading({
         text:'正在加载数据...',
         effectOption: {backgroundColor: 'rgba(0, 0, 0, 0.2)'}
-    })
+    })*/
     cpuDataCharts.showLoading({
         text:'正在加载数据...',
         effectOption: {backgroundColor: 'rgba(0, 0, 0, 0.2)'}
@@ -547,4 +579,5 @@ layui.use(['element', 'tree', 'table', 'layer', 'form'],function () {
     },2000)
     initCharts();
     initBaseInfo();
+
 })

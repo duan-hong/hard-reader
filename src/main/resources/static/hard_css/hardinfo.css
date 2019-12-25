@@ -21,6 +21,12 @@
     float: left;
 }
 
+.info-title1{
+    width: 130px;
+    display: block;
+    float: left;
+}
+
 .info-value{
     width: 90px;
     display: block;
@@ -28,6 +34,11 @@
 }
 .info-value1{
     width: 185px;
+    display: block;
+    float: left;
+}
+.info-value2{
+    width: 130px;
     display: block;
     float: left;
 }

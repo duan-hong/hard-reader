@@ -1,7 +1,7 @@
 package com.asiainfo.hardreader.controller.page;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
+import com.asiainfo.hardreader.Entitys.constant.MenuConstant;
+import org.apache.commons.lang.StringUtils;import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,10 +15,10 @@ public class PageController {
 
     @RequestMapping("/page/{pageName}")
     public String pageByName(@PathVariable String pageName){
-        if (StringUtils.isEmpty(pageName)){
-            System.out.println("页面不能为空");
-            return "404";
+        if (MenuConstant.MENU_LIST.contains(pageName)){
+            return "page/"+pageName;
+        }else{
+            return "page/404";
         }
-        return pageName;
     }
 }

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * @author duanhong
  * @description 硬件基本信息
@@ -86,5 +88,21 @@ public class HardBaseController {
         YitaiNetBaseInfo yiTaiNetBaseInfo=hardBaseService.getYiTaiNetBaseInfo();
         return new BaseResponse<YitaiNetBaseInfo>(yiTaiNetBaseInfo);
     }
+
+    @GetMapping("/fileSystem")
+    @ResponseBody
+    public BaseResponse<List<FileSystemBaseInfo>> getFs(){
+        List<FileSystemBaseInfo> fileSystemBaseInfos=hardBaseService.getFileSystemBaseInfo();
+        return new BaseResponse<List<FileSystemBaseInfo>>(fileSystemBaseInfos);
+    }
+
+    @GetMapping("/fileSystemOfOshi")
+    @ResponseBody
+    public BaseResponse<List<FileSysInfo>> getFileSysInfo(){
+        List<FileSysInfo> list=hardBaseService.getFileSysInfo();
+        return new BaseResponse<List<FileSysInfo>>(list);
+    }
+
+
 
 }

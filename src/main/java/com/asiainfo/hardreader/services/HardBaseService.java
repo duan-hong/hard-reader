@@ -3,6 +3,15 @@ package com.asiainfo.hardreader.services;
 import com.asiainfo.hardreader.Entitys.vo.*;
 import org.hyperic.sigar.*;
 import org.springframework.stereotype.Service;
+import oshi.SystemInfo;
+import oshi.hardware.HardwareAbstractionLayer;
+import oshi.software.os.OSFileStore;
+import oshi.util.FormatUtil;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author duanhong
@@ -116,5 +125,67 @@ public class HardBaseService {
             e.printStackTrace();
         }
         return yitaiNetBaseInfo;
+    }
+
+    public List<FileSystemBaseInfo> getFileSystemBaseInfo() {
+        Sigar sigar = new Sigar();
+        List<FileSystemBaseInfo> list=new ArrayList<>();
+        try {
+            FileSystem fslist[] = sigar.getFileSystemList();
+            for (FileSystem fileSystem:fslist) {
+                FileSystemBaseInfo fileSystemBaseInfo=new FileSystemBaseInfo();
+                fileSystemBaseInfo.setDevName(fileSystem.getDevName());
+                fileSystemBaseInfo.setDirName(fileSystem.getDirName());
+                fileSystemBaseInfo.setFlags(fileSystem.getFlags()+"");
+                fileSystemBaseInfo.setType(fileSystem.getType()+"");
+                fileSystemBaseInfo.setSysTypeName(fileSystem.getSysTypeName());
+                switch (fileSystem.getType()){
+                    case 2:
+                        fileSystemBaseInfo.setTypeName("本地文件");
+                        break;
+                    case 3:
+                        fileSystemBaseInfo.setTypeName("网络文件");
+                        break;
+                    case 4:
+                        fileSystemBaseInfo.setTypeName("闪存");
+                        break;
+                    case 5:
+                        fileSystemBaseInfo.setTypeName("光驱");
+                        break;
+                    case 6:
+                        fileSystemBaseInfo.setTypeName("页面交换");
+                        break;
+                    default:
+                        break;
+                }
+                list.add(fileSystemBaseInfo);
+            }
+        } catch (SigarException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<FileSysInfo> getFileSysInfo() {
+        SystemInfo si = new SystemInfo();
+        oshi.software.os.OperatingSystem os = si.getOperatingSystem();
+        List<FileSysInfo> list=new ArrayList<>();
+        OSFileStore[] fsArray = os.getFileSystem().getFileStores();
+        for (OSFileStore fs : fsArray) {
+            long usable = fs.getUsableSpace();
+            long total = fs.getTotalSpace();
+            FileSysInfo fileSysInfo=new FileSysInfo();
+            fileSysInfo.setName(fs.getName());
+            fileSysInfo.setDesc(fs.getDescription().isEmpty() ? "file system" : fs.getDescription());
+            fileSysInfo.setType(fs.getType());
+            fileSysInfo.setUsable(FormatUtil.formatBytes(usable));
+            fileSysInfo.setTotalSpace(FormatUtil.formatBytes(fs.getTotalSpace()));
+            double percent=100d * usable / total;
+            BigDecimal a = BigDecimal.valueOf(percent);
+            BigDecimal b =a.setScale(2, RoundingMode.HALF_UP);//保留两位小数
+            fileSysInfo.setUsedPercent(b);
+            list.add(fileSysInfo);
+        }
+        return list;
     }
 }
